@@ -78,10 +78,11 @@ app.get("/auth/logout", (req: Request, res: Response) => {
 });
 
 app.get("/auth/user", (req: Request, res: Response) => {
+    console.log(req.user)
     res.status(200).json({
         isSuccess: true,
         message: "User data fetched",
-        data: req.user
+        data: req.user || null
     })
 });
 
