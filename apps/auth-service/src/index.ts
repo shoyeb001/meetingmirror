@@ -9,7 +9,8 @@ import mongoose from "mongoose";
 import User from "./models/User";
 
 const app = express();
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(express.json());
+app.use(cors({ origin: "http://localhost:3001", credentials: true }));
 mongoose
     .connect(config.DB_URL)
     .then(() => console.log("MongoDB connected"))
@@ -66,18 +67,22 @@ passport.deserializeUser((user: any, done) => {
 
 app.get("/auth/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 app.get("/auth/google/callback", passport.authenticate("google", {
-    successRedirect: "http://localhost:3000/dashboard",
-    failureRedirect: "http://localhost:3000/login"
+    successRedirect: "http://localhost:3001/dashboard",
+    failureRedirect: "http://localhost:3001/login"
 }));
 
 app.get("/auth/logout", (req: Request, res: Response) => {
     req.logout(() => {
-        res.redirect("http://localhost:3000/login");
+        res.redirect("http://localhost:3001/login");
     })
 });
 
 app.get("/auth/user", (req: Request, res: Response) => {
-    res.send(req.user || null)
+    res.status(200).json({
+        isSuccess: true,
+        message: "User data fetched",
+        data: req.user
+    })
 });
 
 
