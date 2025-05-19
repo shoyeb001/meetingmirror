@@ -7,6 +7,8 @@ import config from "./config/config";
 import session from "express-session";
 import mongoose from "mongoose";
 import User from "./models/User";
+import { RedisStore } from "connect-redis";
+import { createClient } from "redis";
 
 const app = express();
 app.use(express.json());
@@ -16,8 +18,17 @@ mongoose
     .then(() => console.log("MongoDB connected"))
     .catch((err) => console.log(err));
 
+//Redis Client
+const authRedisClient = createClient({});
+authRedisClient.connect().catch((err) => console.log(err));
+let redisStore = new RedisStore({
+    client: authRedisClient,
+    prefix: "auth:",
+});
+
 app.use(
     session({
+        store: redisStore,
         secret: config.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
