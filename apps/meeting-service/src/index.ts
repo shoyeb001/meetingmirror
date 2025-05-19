@@ -8,9 +8,11 @@ import session from "express-session";
 import { auth } from "./middleware/auth";
 import { user } from "./middleware/user";
 import { Response } from "express";
+import router from "./routes/route";
 const app = express();
 app.use(express.json())
 app.use(cors());
+
 
 mongoose
     .connect(config.DB_URL)
@@ -32,6 +34,7 @@ app.use(
         cookie: { secure: false }, // set secure: true if on https
     })
 );
+app.use("/meeting", router);
 app.get("/meeting/all", [auth, user], (req: any, res: Response) => {
     res.status(200).json({
         isSuccess: true,
