@@ -9,6 +9,10 @@ import { auth } from "./middleware/auth";
 import { user } from "./middleware/user";
 import { Response } from "express";
 import router from "./routes/route";
+import { initRabbitMq, channel } from "./lib/rabbbitmq";
+import { Meeting } from "./model/meeting.model";
+import { consumeQueue } from "./lib/consume";
+
 const app = express();
 app.use(express.json())
 app.use(cors());
@@ -44,6 +48,9 @@ app.get("/meeting/all", [auth, user], (req: any, res: Response) => {
         }
     })
 });
-app.listen(config.PORT, () => {
+
+
+app.listen(config.PORT, async () => {
+    await consumeQueue();
     console.log(`Server is running on port ${config.PORT}`);
 });

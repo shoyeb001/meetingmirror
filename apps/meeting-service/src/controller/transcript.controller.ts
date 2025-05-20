@@ -34,6 +34,7 @@ const transcriptController = {
         });
         await meetingData.save();
         publishToQueue('transcript_uploaded', {
+            meetingId: meetingData._id,
             data: transcriptText
         });
         res.status(200).json({
