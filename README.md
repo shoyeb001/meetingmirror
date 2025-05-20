@@ -36,6 +36,8 @@ This Turborepo of MeetingMirror includes the following packages/apps. This conta
 
 - `auth-service`: A service that handles user authentication and authorization.
 - `meeting-service`: A service that processes meeting transcripts and generates insights.
+- `gateway`: A gateway service that proxies requests to the other services.
+- `ai-transcript`: A service that uses AI models to analyze meeting transcripts and generate insights.
 - `web`: The user interface of the application powered by Next.js.
 
 ## Technologies used
