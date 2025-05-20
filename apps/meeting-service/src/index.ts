@@ -39,15 +39,6 @@ app.use(
     })
 );
 app.use("/meeting", router);
-app.get("/meeting/all", [auth, user], (req: any, res: Response) => {
-    res.status(200).json({
-        isSuccess: true,
-        message: "Meeting data fetched",
-        data: {
-            msg: req.user,
-        }
-    })
-});
 
 
 app.listen(config.PORT, async () => {
