@@ -26,7 +26,6 @@ export const createInsight = async (text: string, meetingId: string) => {
             systemInstruction: systemText,
         }
     });
-    console.log(response.text)
     const insightData = {
         meetingId,
         insight: response.text

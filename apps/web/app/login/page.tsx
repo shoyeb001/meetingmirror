@@ -6,7 +6,7 @@ import { SocialButton } from "@repo/ui/social-button";
 export default function LoginPage() {
     const router = useRouter();
     const handleLogin = () => {
-        window.location.href = "http://localhost:4000/auth/google";
+        window.location.href = "http://localhost:8000/auth/google";
     };
 
     return (

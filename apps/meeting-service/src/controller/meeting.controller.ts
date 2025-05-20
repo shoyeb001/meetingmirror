@@ -4,7 +4,6 @@ const meetingController = {
     async getAllMeetings(req: any, res: Response) {
         try {
             const userId = req.user._id;
-            console.log("User ID:", userId);
             const meetings = await Meeting.find({
                 userId: userId
             });

@@ -76,19 +76,19 @@ passport.deserializeUser((user: any, done) => {
     done(null, user);
 })
 
-app.get("/auth/google", passport.authenticate("google", { scope: ["profile", "email",] }));
+app.get("/google", passport.authenticate("google", { scope: ["profile", "email",] }));
 app.get("/auth/google/callback", passport.authenticate("google", {
     successRedirect: "http://localhost:3001/dashboard",
     failureRedirect: "http://localhost:3001/login"
 }));
 
-app.get("/auth/logout", (req: Request, res: Response) => {
+app.get("/logout", (req: Request, res: Response) => {
     req.logout(() => {
         res.redirect("http://localhost:3001/login");
     })
 });
 
-app.get("/auth/user", (req: Request, res: Response) => {
+app.get("/user", (req: Request, res: Response) => {
     console.log(req.user)
     res.status(200).json({
         isSuccess: true,

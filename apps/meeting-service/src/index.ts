@@ -38,7 +38,7 @@ app.use(
         cookie: { secure: false }, // set secure: true if on https
     })
 );
-app.use("/meeting", router);
+app.use("/api", router);
 
 
 app.listen(config.PORT, async () => {

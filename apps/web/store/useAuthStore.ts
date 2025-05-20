@@ -22,7 +22,6 @@ export const useAuthStore = create<AuthStore>((set) => ({
             //     credentials: 'include',
             // });
             const res = await api.get("auth/user");
-            console.log(res);
             set({ user: res.data.data});
         } catch (err) {
             set({ user: null });

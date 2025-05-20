@@ -16,14 +16,11 @@ const transcriptController = {
             res.status(400).json({ error: error.details[0].message });
         }
         const { title, description, source } = req.body;
-        console.log(req.body, "body")
         const file = req.file;
-        console.log("File: ", file);
         let dataBuffer = fs.readFileSync(file.path);
         const data = await PdfParse(dataBuffer);
         const transcriptText = data.text;
         const fileUrl = file.path;
-        console.log("Transcript Text: ", transcriptText);
         const meetingData = new Meeting({
             userId: req.user._id,
             title,

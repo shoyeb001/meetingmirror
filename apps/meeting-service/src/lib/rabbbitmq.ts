@@ -5,7 +5,6 @@ export let channel: ampq.Channel;
 export const initRabbitMq = async () => {
     const connection = await ampq.connect(config.RMQ_URL);
     channel = await connection.createChannel();
-    console.log('RabbitMQ connected');
     await channel.assertQueue('transcript_uploaded');
     await channel.assertQueue('insight_created');
 }
